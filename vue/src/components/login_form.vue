@@ -6,6 +6,7 @@
           label="Email address:"
           label-for="input-1"
       >
+      <!--:validation has to actually be named state, check https://bootstrap-vue.org/docs/components/form-->
         <b-form-input
             id="input-1"
             v-model="form.email"
@@ -21,6 +22,7 @@
           label="Password:"
           label-for="input-2"
       >
+      <!--:validation has to actually be named state as above,-->
         <b-form-input
             id="input-2"
             v-model="form.password"
@@ -60,18 +62,18 @@ export default {
       reg: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
     }
   },
-  methods: {
-    validateEmail: function(){
-      return (this.email == "")? "" : (this.reg.test(this.email)) ? true : false;
-  },
+  //Its important though that validateEmail is in computed, in methods doesnt seem to work
   computed: {
-      },
-      validatePassword: function(){
-        return 0;
-      }
-    }
-
-
+    //here its ok to use validateEmail() and validateEmail: function()
+    validateEmail: function(){
+      //checks the syntax of the email written by the user
+      return (this.email == "")? true : (this.reg.test(this.email)) ? true : false;
+    },
+    validatePassword: function(){
+      //checks the syntax of the pass written by the user
+      return 0;
+    },
+  }
 }
 </script>
 <style>
