@@ -12,7 +12,7 @@
             v-model="form.email"
             type="email"
             placeholder="Enter it here"
-            :validation="validateEmail"
+            :state="validateEmail"
             required
         ></b-form-input>
       </b-form-group>
@@ -28,7 +28,7 @@
             v-model="form.password"
             type="password"
             placeholder="Enter your password"
-            :validation="validatePassword"
+            :state="validatePassword"
             required
         ></b-form-input>
       </b-form-group>
@@ -51,11 +51,11 @@ export default {
       },
       users: [
         {
-          username: "roberto@outlook.com",
+          email: "roberto@outlook.com",
           password: "123"
         },
         {
-          username: "Juanito@gmail.com",
+          email: "Juanito@gmail.com",
           password: "456"
         }
       ],
@@ -67,7 +67,7 @@ export default {
     //here its ok to use validateEmail() and validateEmail: function()
     validateEmail: function(){
       //checks the syntax of the email written by the user
-      return (this.email == "")? true : (this.reg.test(this.email)) ? true : false;
+      return this.reg.test(this.form.email);
     },
     validatePassword: function(){
       //checks the syntax of the pass written by the user
