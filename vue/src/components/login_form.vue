@@ -85,11 +85,14 @@ export default {
       //checks the syntax of the email written by the user
       return this.reg.test(this.form.email)
     },
-    validatePassword: function () {
-      //checks the syntax of the pass written by the user
+    
+  },
+  methods:{
+    validateLogin: function () {
+      //checks if user exists
       return 0
     },
-  },
+  }
 }
 </script>
 <style scoped>

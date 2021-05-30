@@ -1,92 +1,114 @@
 <template>
-  <b-card bg-variant="light">
-    <b-form-group
-      label-cols-lg="3"
-      label="Shipping Address"
-      label-size="lg"
-      label-class="font-weight-bold pt-0"
-      class="mb-0"
-    >
-      <b-form-group
-        label="Street:"
-        label-for="nested-street"
-        label-cols-sm="3"
-        label-align-sm="right"
-      >
-        <b-form-input id="nested-street"></b-form-input>
-      </b-form-group>
+  <b-container class="login_form">
+    <b-row class="vh-100" align-v="center">
+      <b-col cols="6" offset="3">
+        <b-card title="Login" bg-variant="light">
+          <b-card-body>
+            <b-form-group
+              id="input-group-0"
+              label="Username"
+              label-for="input-0"
+            >
+              <!--:validation has to ask server if that username is taken-->
+              <b-form-input
+                id="input-0"
+                v-model="form.username"
+                type="text"
+                placeholder="Cool username"
+                :state="validateUsername"
+                required
+              ></b-form-input>
+            </b-form-group>
 
-      <b-form-group
-        label="City:"
-        label-for="nested-city"
-        label-cols-sm="3"
-        label-align-sm="right"
-      >
-        <b-form-input id="nested-city"></b-form-input>
-      </b-form-group>
+            <b-form-group id="input-group-1" label="Email" label-for="input-1">
+              <!--:validation has to actually be named state, check https://bootstrap-vue.org/docs/components/form-->
+              <b-form-input
+                id="input-1"
+                v-model="form.email"
+                type="email"
+                placeholder="Email"
+                :state="validateEmail"
+                required
+              ></b-form-input>
+            </b-form-group>
 
-      <b-form-group
-        label="State:"
-        label-for="nested-state"
-        label-cols-sm="3"
-        label-align-sm="right"
-      >
-        <b-form-input id="nested-state"></b-form-input>
-      </b-form-group>
+            <b-form-group
+              id="input-group-2"
+              label="Password"
+              label-for="input-2"
+            >
+              <!--:validation has to actually be named state as above,-->
+              <b-form-input
+                id="input-2"
+                v-model="form.password"
+                type="password"
+                placeholder="Password"
+                :state="validatePassword"
+                required
+              ></b-form-input>
+            </b-form-group>
 
-      <b-form-group
-        label="Country:"
-        label-for="nested-country"
-        label-cols-sm="3"
-        label-align-sm="right"
-      >
-        <b-form-input id="nested-country"></b-form-input>
-      </b-form-group>
+            <b-form-group
+              id="input-group-3"
+              label="Height"
+              label-for="input-3"
+            >
+              
+            </b-form-group>
+            <b-form-spinbutton
+              id="sb-locale"
+              v-model="value"
+              :locale="locale"
+              min="0"
+              max="2.5"
+              step="0.05"
+            ></b-form-spinbutton>
 
-      <b-form-group
-        label="Ship via:"
-        label-cols-sm="3"
-        label-align-sm="right"
-        class="mb-0"
-        v-slot="{ ariaDescribedby }"
-      >
-        <b-form-radio-group
-          class="pt-2"
-          :options="['Air', 'Courier', 'Mail']"
-          :aria-describedby="ariaDescribedby"
-        ></b-form-radio-group>
-      </b-form-group>
-    </b-form-group>
-  </b-card>
-</div>
+          </b-card-body>
+          <div class="d-flex justify-content-center">
+            <b-button @click="validate_Register" type="submit" variant="dark"
+              >Register
+            </b-button>
+          </div>
+        </b-card>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
 export default {
-  name:'login_form',
+  name: "login_form",
   data() {
     return {
       form: {
-        email: '',
-        password: '',
+        username:"",
+        email: "",
+        password: "",
+        height:"",//con ruedita
+        genero:"",//switch
+        edad:"",//con ruedita
       },
-      reg: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
+      
+      reg: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
     }
   },
   //Its important though that validateEmail is in computed, in methods doesnt seem to work
   computed: {
     //here its ok to use validateEmail() and validateEmail: function()
-    validateEmail: function(){
+    validateEmail: function () {
       //checks the syntax of the email written by the user
-      return this.reg.test(this.form.email);
+      return this.reg.test(this.form.email)
     },
-    validatePassword: function(){
-      //checks the syntax of the pass written by the user
-      return 0;
+    
+  },
+  methods:{
+    validateLogin: function () {
+      //checks if user exists
+      return 0
     },
   }
 }
 </script>
-<style>
-
-</style>
+<style scoped>
+</style>  
