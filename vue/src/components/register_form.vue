@@ -1,5 +1,5 @@
 <template>
-  <b-container class="login_form">
+  <b-container id="register_form">
     <b-row class="vh-100" align-v="center">
       <b-col cols="6" offset="3">
         <b-card title="Register" bg-variant="light">
@@ -132,7 +132,7 @@ export default {
     
   },
   methods:{
-    validateLogin: function () {
+    validateRegister: function () {
       //checks if user exists
       return 0
     },
