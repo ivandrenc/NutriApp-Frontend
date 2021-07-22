@@ -4,24 +4,28 @@
       <b-col cols="6" offset="3">
         <b-card title="Login" bg-variant="light">
           <b-card-body>
-            <b-form-group id="input-group-1" label="Email" label-for="input-1">
-              <!--:validation has to actually be named state, check https://bootstrap-vue.org/docs/components/form-->
+             <b-form-group
+              id="input-group-0"
+              label="Username"
+              label-for="input-0"
+            >
+              <!--:validation has to ask server if that username is taken-->
               <b-form-input
-                id="input-1"
-                v-model="form.email"
-                type="email"
-                placeholder="Email"
-                :state="validateEmail"
+                id="input-0"
+                v-model="form.username"
+                type="text"
+                placeholder="Cool username"
                 required
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group
+             <b-form-group
               id="input-group-2"
               label="Password"
               label-for="input-2"
             >
               <!--:validation has to actually be named state as above,-->
+              <!-- password validation here to avoid unnecessary requests to server-->
               <b-form-input
                 id="input-2"
                 v-model="form.password"
@@ -31,6 +35,7 @@
                 required
               ></b-form-input>
             </b-form-group>
+
             <div class="d-flex flex-row-reverse">
               <b-link style="color: rgb(61, 61, 61); font-size: 0.9em;"
                 >Forgot Password?</b-link
@@ -38,59 +43,61 @@
             </div>
           </b-card-body>
           <div class="d-flex justify-content-center">
-            <b-button @click="validate_login" type="submit" variant="dark"
+            <b-button @click="validateLogin" type="submit" variant="dark"
               >Login
             </b-button>
+             <p v-if="msg">{{ msg }}</p>
           </div>
         </b-card>
         <div class="d-flex justify-content-center">
             Dont have an account yet?
         </div>
         <div class="d-flex justify-content-center">
-            <b-link
+            <b-link href="/register"
                 >Register!</b-link
               >
         </div>
+
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import AuthService from '@/services/AuthService.js';
+
 export default {
   name: "login_form",
   data() {
     return {
       form: {
-        email: "",
+        username: "",
         password: "",
       },
-      users: [
-        {
-          email: "roberto@outlook.com",
-          password: "123",
-        },
-        {
-          email: "Juanito@gmail.com",
-          password: "456",
-        },
-      ],
-      reg: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+      msg: "",
     }
   },
-  //Its important though that validateEmail is in computed, in methods doesnt seem to work
-  computed: {
-    //here its ok to use validateEmail() and validateEmail: function()
-    validateEmail: function () {
-      //checks the syntax of the email written by the user
-      return this.reg.test(this.form.email)
-    },
-    
-  },
   methods:{
-    validateLogin: function () {
-      //checks if user exists
-      return 0
+    async validateLogin() {
+      try {
+        const credentials = {
+          username: this.username,
+          password: this.password
+        };
+        const response = await AuthService.login(credentials);
+        
+        this.msg = response.msg;
+
+        const token = response.token;
+
+        const user = response.user;
+
+        this.$store.dispatch('login', { token, user });
+        this.$router.push('/');
+
+      } catch (error) {
+        this.msg = error.response.data.msg;
+      }
     },
   }
 }
