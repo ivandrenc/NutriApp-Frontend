@@ -4,9 +4,9 @@
       <b-col cols="6" offset="3">
         <b-card title="Register" bg-variant="light">
           <b-card-body>
+
             <b-form-group
-              id="input-group-0"
-              label="Username"
+              id="username-register"
               label-for="input-0"
             >
               <!--:validation has to ask server if that username is taken-->
@@ -14,14 +14,13 @@
                 id="input-0"
                 v-model="form.username"
                 type="text"
-                placeholder="Cool username"
+                placeholder="Username"
                 required
               ></b-form-input>
             </b-form-group>
 
             <b-form-group
-              id="input-group-2"
-              label="Password"
+              id="password-register1"
               label-for="input-2"
             >
               <!--:validation has to actually be named state as above,-->
@@ -37,15 +36,14 @@
             </b-form-group>
 
              <b-form-group
-              id="input-group-3"
-              label="Password2"
+              id="password-register2"
               label-for="input-3"
             >
               <b-form-input
                 id="input-3"
                 v-model="form.password2"
                 type="password"
-                placeholder="Password"
+                placeholder="Confirm your password"
                 :state="checkequals()"
                 required
               ></b-form-input>
