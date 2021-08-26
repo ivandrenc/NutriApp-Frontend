@@ -1,9 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./components/Home.vue";
-import Register from "./components/register_form.vue";
-import Login from "./components/login_form.vue";
-import MainInterface_form from "./components/MainInterface_form";
+import Home from "./views/Home.vue";
+import Register from "./views/Register.vue";
+import Login from "./views/Login.vue";
+import Dashboard from "./views/Dashboard";
 
 Vue.use(Router);
 
@@ -29,7 +29,7 @@ export default new Router({
     {
       path: "/dashboard",
       name: "dashboard",
-      component: MainInterface_form
+      component: Dashboard
     },
   ]
 });

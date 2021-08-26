@@ -76,7 +76,7 @@
 import AuthService from '@/services/AuthService.js';
 
 export default {
-  name: "login_form",
+  name: "register_form",
   data() {
     return {
       form: {

@@ -5,8 +5,7 @@
 <script>
 
 export default {
-  name: "MainInterface",
-
+  name: "Home",
   data() {
     return {
     }

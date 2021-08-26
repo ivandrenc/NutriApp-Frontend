@@ -3,12 +3,15 @@
     <h1>Hi {{ username }}</h1>
     <p>{{ secretMessage }}</p>
     <input type="button" value="Logout" @click="logout" />
+    componeteleft
+    componetemidd
   </div>
 </template>
 
 <script>
 import AuthService from '@/services/AuthService.js';
 export default {
+  name:'Dashboard',
   data() {
     return {
       secretMessage: '',
