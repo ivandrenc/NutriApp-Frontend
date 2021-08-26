@@ -6,13 +6,12 @@
           <b-card-body>
 
             <b-form-group id="username-login" label-for="input-0">
-              <!--:validation has to ask server if that username is taken-->
               <b-form-input
-                  id="input-0"
-                  v-model="form.username"
-                  type="text"
-                  placeholder="Username"
-                  required
+                id="input-0"
+                v-model="form.username"
+                type="text"
+                placeholder="Cool username"
+                required
               ></b-form-input>
             </b-form-group>
 
@@ -70,9 +69,10 @@ export default {
         password: "",
       },
       msg: "",
+      reg_mail: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
     }
   },
-  methods: {
+  methods:{
     async validateLogin() {
       //  const credentials = {
       //    username: this.username,
