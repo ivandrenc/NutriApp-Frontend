@@ -84,22 +84,23 @@ export default {
         password2: "",
       },
       msg: "",
-      reg_mail: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+      //reg_mail: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
       reg_pass: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
     }
   },
   //Its important though that validateEmail is in computed, in methods doesnt seem to work
   computed: {
+    /* FOR NOW not necessary because we are using a Username instead of email.
     //here its ok to use validateEmail() and validateEmail: function()
     validateEmail: function () {
       //checks the syntax of the email written by the user
       return this.reg_mail.test(this.form.email);
-    },
-    validatePassword: function (pw){
-      return this.reg_pass.test(pw);
-    }
+    }*/
   },
   methods:{
+    validatePassword: function (pw){
+      return this.reg_pass.test(pw);
+    },
     checkequals: function () {
       if((this.form.password==this.form.password2)&&this.validatePassword(this.form.password2)) {
         return true;
