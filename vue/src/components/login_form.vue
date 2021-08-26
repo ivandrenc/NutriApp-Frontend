@@ -6,13 +6,11 @@
           <b-card-body>
 
             <b-form-group id="username-login" label-for="input-0">
-              <!--:validation has to ask server if that username is taken-->
               <b-form-input
                 id="input-0"
                 v-model="form.username"
                 type="text"
                 placeholder="Cool username"
-                :state="validateEmail"
                 required
               ></b-form-input>
             </b-form-group>
@@ -73,12 +71,6 @@ export default {
       msg: "",
       reg_mail: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
     }
-  },
-  computed:{
-    validateEmail:function(){
-      //check email to not let user make extra requests
-      return this.reg_mail.test(this.form.email);
-    },
   },
   methods:{
     async validateLogin() {
