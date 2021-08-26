@@ -1,24 +1,28 @@
 <template>
   <div>
-    <h1>Hi {{ username }}</h1>
-    <p>{{ secretMessage }}</p>
+    <left-side-dashboard></left-side-dashboard>
+    <right-side-dashboard></right-side-dashboard>
     <input type="button" value="Logout" @click="logout" />
-    componeteleft
-    componetemidd
   </div>
 </template>
 
 <script>
-import AuthService from '@/services/AuthService.js';
+//import AuthService from '@/services/AuthService.js';
+import leftSideDashboard from "../components/leftSideDashboard.vue";
+import rightSideDashboard from "@/components/rightSideDashboard";
 export default {
   name:'Dashboard',
+  components: {
+    LeftSideDashboard: leftSideDashboard,
+    RightSideDashboard: rightSideDashboard
+  },
   data() {
     return {
       secretMessage: '',
       username: ''
     };
   },
-  async created() {
+  /*async created() {
     if (!this.$store.getters.isLoggedIn) {
       this.$router.push('/login');
     }
@@ -30,6 +34,6 @@ export default {
       this.$store.dispatch('logout');
       this.$router.push('/login');
     }
-  }
+  }*/
 };
 </script>
