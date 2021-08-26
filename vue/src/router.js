@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./components/Home.vue";
 import Register from "./components/register_form.vue";
 import Login from "./components/login_form.vue";
+import MainInterface_form from "./components/MainInterface_form";
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       path: "/login",
       name: "login",
       component: Login
+    },
+    {
+      path: "/dashboard",
+      name: "dashboard",
+      component: MainInterface_form
     },
   ]
 });
